@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.DS_Store
+._*
+.venv/
+qa/
+phase1/cases/
+phase1/models/

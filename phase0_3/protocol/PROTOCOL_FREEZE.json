@@ -1,0 +1,39 @@
+{
+  "status": {
+    "PHASE0_3_STATUS": "COMPLETE",
+    "PHASE0_3_DECISION": "GO",
+    "PHASE1_AUTHORIZATION": true,
+    "FORMAL_MODEL_TRAINING_AUTHORIZATION": true,
+    "PRIMARY_TASK_T2_QUALIFICATION": "PASS",
+    "CROSS_PLATFORM_QUALIFICATION": "PASS",
+    "PATIENT_GROUPED_VALIDATION_QUALIFICATION": "PASS",
+    "LOSO_VALIDATION_QUALIFICATION": "PASS",
+    "NOVELTY_QUALIFICATION": "PARTIAL",
+    "PRIMARY_CONTRAST_AUTHORIZATION": true,
+    "SECONDARY_PATIENT_BOUNDARY_ANALYSIS_AUTHORIZATION": true,
+    "IDENTITY_LEAKAGE_CLAIM_AUTHORIZATION": false,
+    "STUDY_GENERALIZATION_CLAIM_AUTHORIZATION": true,
+    "MANUSCRIPT_DRAFTING_AUTHORIZATION": false
+  },
+  "studies": [
+    "GSE37182",
+    "GSE44076",
+    "GSE50760"
+  ],
+  "primary_records": 261,
+  "primary_patients": 131,
+  "common_gene_count": 17819,
+  "source_preprocessing_caveat": "CONDITIONAL_ON_DEPOSITED_RMA_RSN_FPKM_INPUTS",
+  "platform_study_confounding": "COMPLETE_ALIASING_NO_COMPONENT_ATTRIBUTION",
+  "primary_task": "T2",
+  "primary_model": "L2_LogisticRegression",
+  "primary_representation": "within_sample_common_gene_rank",
+  "primary_metric": "AUROC",
+  "primary_contrast": "V1_minus_V2",
+  "secondary_contrast": "V0_minus_V1",
+  "novelty": "PARTIALLY_DONE",
+  "original_identity_inflation_question": "PERMANENTLY_RETIRED",
+  "real_disease_models_fitted": 0,
+  "real_disease_AUROC_computed": 0,
+  "stop_after_freeze": true
+}

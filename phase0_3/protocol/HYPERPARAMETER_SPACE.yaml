@@ -1,0 +1,67 @@
+protocol_version: PHASE0_3_FROZEN_2026_11_17
+primary_task: T2
+primary_representation: within_sample_common_gene_rank
+primary_metric: AUROC
+primary_contrast: AUROC_V1_minus_AUROC_V2
+secondary_contrast: AUROC_V0_minus_AUROC_V1
+resampling_unit: patient
+bootstrap:
+  replicates: 2000
+  seed: 170329
+  strata: study
+  interval: percentile_2.5_97.5
+  refit_models: false
+validation:
+  repeat_seeds: [17, 29, 43]
+  V0_outer_folds: 5
+  V1_outer_folds: 5
+  V2_outer: leave_one_study_out
+  inner_folds: 3
+  selection_score: mean_of_inner_fold_study_specific_AUROCs
+  tie_tolerance: 1.0e-12
+  tie_rule: first_in_frozen_grid_order
+  OOF_aggregation: arithmetic_mean_of_three_repeat_probabilities
+preprocessing:
+  mapping_key: Entrez_Gene_ID
+  ambiguous_or_retired: exclude_and_log
+  duplicate_collapse: within_sample_median
+  common_universe: annotation_intersection
+  RNAseq: log2_1_plus_deposited_FPKM
+  primary_rank: average_ties_then_rank_minus_one_over_gene_count_minus_one
+  near_zero_variance_threshold: 1.0e-12
+  variance_fit_scope: current_inner_or_outer_training_only
+  primary_gene_scaling: none
+  secondary_gene_scaling: StandardScaler_fit_on_current_training_only
+models:
+  primary:
+    name: LogisticRegression
+    penalty: l2
+    solver: liblinear
+    C: [0.0001, 0.001, 0.01, 0.1, 1.0, 10.0]
+    fit_intercept: true
+    class_weight: null
+    tol: 1.0e-6
+    max_iter: 10000
+    random_state: repeat_seed
+  sensitivity:
+    name: LogisticRegression
+    penalty: elasticnet
+    solver: saga
+    C: [0.01, 0.1, 1.0]
+    l1_ratio: [0.1, 0.5, 0.9]
+    fit_intercept: true
+    class_weight: null
+    tol: 1.0e-4
+    max_iter: 10000
+    random_state: repeat_seed
+execution:
+  numerical_threads: 1
+  convergence_failure: log_and_stop_affected_analysis_no_grid_expansion
+  real_data_fit_in_phase0_3: forbidden
+negative_controls:
+  replicates: 20
+  seed_base: 300000
+  NC1: training_only_within_patient_random_label_swap_plus_within_study_singleton_permutation
+  NC2: training_only_independent_gene_row_permutation_within_study
+  seed_derivation: "SeedSequence([300000,control_id,control_replicate,boundary_id,repeat_id,outer_id,inner_id]).generate_state(1)[0]"
+  index_convention: "control=1..2;replicate=0..19;boundary=0..2;repeat=0..2;outer=frozen_fold;inner=0..2_or_3_for_outer_refit"

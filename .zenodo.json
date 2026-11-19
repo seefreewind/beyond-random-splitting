@@ -1,0 +1,20 @@
+{
+  "title": "Beyond Random Splitting: Validation Boundaries and Score Comparability in Cross-Study Transcriptomic Machine Learning",
+  "upload_type": "software",
+  "description": "Reproducible code, frozen processed public transcriptomic inputs, validation assignments, saved predictions, full-precision results and figure source data for the Beyond Random Splitting project. Three archived colorectal transcriptomic studies, 261 primary tissue records from 131 patients, and 17,819 genes.",
+  "creators": [
+    {
+      "name": "Beyond Random Splitting"
+    }
+  ],
+  "version": "1.0.0",
+  "access_right": "open",
+  "license": "mit",
+  "keywords": [
+    "cross-study validation",
+    "AUROC",
+    "score comparability",
+    "transcriptomics",
+    "reproducibility"
+  ]
+}

@@ -1,0 +1,4 @@
+study	N_records	N_patients	N_tumor_records	N_normal_records	N_complete_patient_pairs
+GSE37182	29	15	14	15	14
+GSE44076	196	98	98	98	98
+GSE50760	36	18	18	18	18
